@@ -1,24 +1,34 @@
+
+
 <html>
-<body>
-<h2>Hello World!</h2>
+   <head>
+      <title>SELECT Operation</title>
+   </head>
 
-Godrej Garden City
-
-From Abhinav Parmar
-
-Date 4/4/2018
-
-<p>
-<%
-	int i = 13;
-	double u = 89.9;
-	
-	double result = i + u;
-	
-	out.print(result);
-
-%>
-</p>
-
-</body>
+   <body>
+      <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+         url = "jdbc:mysql://10.128.93.89/sampledb"
+         user = "userPHM"  password = "Fou0RJQFndA4q3Qr"/>
+ 
+      <sql:query dataSource = "${snapshot}" var = "result">
+         SELECT * from student_test;
+      </sql:query>
+ 
+      <table border = "1" width = "100%">
+         <tr>
+            <th>Roll No</th>
+            <th>First Name</th>
+       
+         </tr>
+         
+         <c:forEach var = "row" items = "${result.rows}">
+            <tr>
+               <td><c:out value = "${row.rollno}"/></td>
+               <td><c:out value = "${row.name}"/></td>
+               
+            </tr>
+         </c:forEach>
+      </table>
+ 
+   </body>
 </html>
